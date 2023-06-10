@@ -20,7 +20,8 @@
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "build:tailwind:dev": "npx tailwindcss -i ./styles/input.css -o ./public/output.css --watch",
     "build:tailwind:prod": "npx tailwindcss -i ./styles/input.css -o ./public/output.css",
-    "dev": "run-p build:tailwind:dev start:debug"
+    "dev": "run-p build:tailwind:dev start:debug",
+    "nest": "nest"
   },
   "dependencies": {
     "@nestjs/common": "^9.0.0",
