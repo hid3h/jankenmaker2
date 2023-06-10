@@ -1,0 +1,45 @@
+{{#> main}}
+{{#*inline "body"}}
+<div
+  class="text-center text-white bg-slate-900 flex justify-center min-h-screen"
+>
+  <div class="max-w-xl py-6">
+    <h1>{{title}}</h1>
+    <p>作者:
+      <a
+        href="https://twitter.com/_hid3"
+        target="_brank"
+        class="underline"
+      >@Hid3</a></p>
+    <img src={{imagePath}} class="mt-6" />
+    <div class="text-slate-900 p-6">
+      <a
+        href="/j/{{id}}/rock"
+        class="py-2 px-4 rounded inline-flex items-center bg-white gap-2 font-bold"
+      >
+        <img src="/svgs/hand-back-fist-regular.svg" class="w-8 bg-white" /><span
+        >グーで勝つ</span>
+      </a>
+      <div class="flex justify-between mt-6">
+        <a
+          href="/j/{{id}}/scissors"
+          class="py-2 px-4 rounded inline-flex items-center bg-white gap-2 font-bold"
+        >
+          <img
+            src="/svgs/hand-scissors-regular.svg"
+            class="w-8 bg-white transform rotate-90"
+          /><span>チョキで勝つ</span>
+        </a>
+        <a
+          href="/j/{{id}}/paper"
+          class="py-2 px-4 rounded inline-flex items-center bg-white gap-2 font-bold"
+        >
+          <img src="/svgs/hand-regular.svg" class="w-8 bg-white" /><span
+          >パーで勝つ</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+{{/inline}}
+{{/main}}
