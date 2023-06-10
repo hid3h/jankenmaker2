@@ -398,3 +398,6 @@ Temporary Items
 dist
 .webpack
 .serverless/**/*.zip
+
+# 以下自分で追加
+output.css
