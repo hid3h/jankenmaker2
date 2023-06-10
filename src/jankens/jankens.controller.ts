@@ -1,4 +1,8 @@
-import { Controller } from "@nestjs/common";
+import { Controller, Get, Render } from "@nestjs/common";
 
-@Controller("jankens")
-export class JankensController {}
+@Controller("j")
+export class JankensController {
+  @Get("ham")
+  @Render("jankens/ham")
+  ham() {}
+}
