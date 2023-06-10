@@ -4,5 +4,10 @@ import { Controller, Get, Render } from "@nestjs/common";
 export class JankensController {
   @Get("ham")
   @Render("jankens/ham")
-  ham() {}
+  ham() {
+    return {
+      title: "ハム太郎とじゃんけん",
+      imagePath: "/ham1.jpg",
+    };
+  }
 }
