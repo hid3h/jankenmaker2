@@ -1,0 +1,30 @@
+{{#> main}}
+{{#*inline "body"}}
+<div
+  class="text-center text-white bg-slate-900 flex justify-center min-h-screen"
+>
+  <div class="max-w-xl py-6">
+    <h1>{{title}}</h1>
+    <p>作者:
+      <a
+        href="https://twitter.com/_hid3"
+        target="_brank"
+        class="underline"
+      >@Hid3</a></p>
+    <p class="mt-6 text-white font-black text-5xl italic">
+      {{jankenResultText}}
+    </p>
+    <img src={{imagePath}} class="mt-6" />
+    <p class="p-6">
+      {{nl2br message}}
+    </p>
+
+    <a
+      href={{twitterShareUrl}}
+      class="mt-6 bg-blue-500 hover:bg-blue-700 text-white font-bold py-4 px-6"
+      target="_brank"
+    >結果をツイートする</a>
+  </div>
+</div>
+{{/inline}}
+{{/main}}

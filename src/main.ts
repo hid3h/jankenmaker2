@@ -15,6 +15,12 @@ async function bootstrap() {
   hbs.registerPartials(join(__dirname, "..", "views", "layouts"));
   hbs.registerPartials(join(__dirname, "..", "views", "partials"));
 
+  hbs.registerHelper("nl2br", (text) => {
+    // 改行コードをbrタグに変換
+    const result = text.replace(/(\n|\r\n)/g, "<br>");
+    return new hbs.SafeString(result);
+  });
+
   await app.listen(8080);
 }
 bootstrap();

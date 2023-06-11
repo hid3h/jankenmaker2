@@ -1,19 +1,22 @@
 import {
+  Body,
   Controller,
   Get,
   NotFoundException,
-  Param,
+  Post,
   Render,
 } from "@nestjs/common";
 import { JankensService } from "./jankens.service";
+import { JankenPlayingDto } from "./dto/janken-playing-dto";
 
-@Controller("j")
+@Controller()
 export class JankensController {
   constructor(private readonly jankenService: JankensService) {}
 
-  @Get(":id")
+  @Get("hamtaro")
   @Render("jankens/show")
-  show(@Param("id") id: string) {
+  show() {
+    const id = "hamtaro";
     const janken = this.jankenService.find(id);
     if (!janken) {
       // 404 Not Found
@@ -24,16 +27,28 @@ export class JankensController {
       id: janken.id,
       title: janken.title,
       imagePath: janken.imagePath,
+      ogp: {
+        title: janken.title,
+        description: "タップしてハム太郎とじゃんけんをすることができます。",
+        url: "https://jankenmaker.com/hamtaro",
+        imageUrl: "https://jankenmaker.com/ham1.jpg",
+      },
     };
   }
 
-  // TODO: pathきめ
-  @Get(":id/result/:hand")
+  @Post("hamtaro")
   @Render("jankens/result")
-  rock() {
+  create(@Body() jankenPlayingDto: JankenPlayingDto) {
+    const id = "hamtaro";
+    const result = this.jankenService.play(id);
     return {
-      title: "ハム太郎とじゃんけん",
-      imagePath: "/ham1.jpg",
+      id: result.janken.id,
+      title: result.janken.title,
+      imagePath: result.janken.imagePath,
+      jankenResultText: result.jankenResultText,
+      message: result.message,
+      palayerHand: jankenPlayingDto.hand,
+      twitterShareUrl: result.twitterShareUrl,
     };
   }
 }
