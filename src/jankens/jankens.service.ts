@@ -89,7 +89,7 @@ export class JankensService {
       jankenResult === "playerWin" ? "YOU WIN" : "YOU LOSE";
 
     const twitterSharedText = encodeURIComponent(
-      jankenResultText + "\n" + jankenResultDisplay.twitterShareMessage,
+      jankenResultText + "\n" + jankenResultDisplay.twitterShareMessage + "\n",
     );
 
     const hashtag = encodeURIComponent(janken.twitterHashtag);
