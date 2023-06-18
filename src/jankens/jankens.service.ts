@@ -57,7 +57,7 @@ const jankens: Record<string, Janken> = {
       messages: ["... ..."],
       twitterShareMessage: "... ...",
     },
-    twitterHashtag: "クールポコ。とじゃんけん",
+    twitterHashtag: "クールポコとじゃんけん",
   },
 };
 
