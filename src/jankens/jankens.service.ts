@@ -41,8 +41,8 @@ const jankens: Record<string, Janken> = {
   // },
   coolpoko: {
     id: "coolpoko",
-    title: "クールポコとじゃんけん",
-    description: "クールポコとじゃんけんをすることができます。",
+    title: "クールポコ。とじゃんけん",
+    description: "クールポコ。とじゃんけんをすることができます。",
     winRate: 0.95,
     beforePlayingImagePath: "/poko-before-playing.jpeg",
     beforePlayingMessage: "なああああああああああああ",
@@ -57,7 +57,7 @@ const jankens: Record<string, Janken> = {
       messages: ["... ..."],
       twitterShareMessage: "... ...",
     },
-    twitterHashtag: "クールポコとじゃんけん",
+    twitterHashtag: "クールポコ。とじゃんけん",
   },
 };
 
