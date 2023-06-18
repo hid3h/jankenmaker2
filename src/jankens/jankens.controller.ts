@@ -26,7 +26,7 @@ export class JankensController {
     return {
       id: janken.id,
       title: janken.title,
-      imagePath: janken.imagePath,
+      imagePath: janken.playerWinImagePath,
       ogp: {
         title: janken.title,
         description: "タップしてハム太郎とじゃんけんをすることができます。",
@@ -44,7 +44,7 @@ export class JankensController {
     return {
       id: result.janken.id,
       title: result.janken.title,
-      imagePath: result.janken.imagePath,
+      imagePath: result.janken.playerWinImagePath,
       jankenResultText: result.jankenResultText,
       message: result.message,
       palayerHand: jankenPlayingDto.hand,
