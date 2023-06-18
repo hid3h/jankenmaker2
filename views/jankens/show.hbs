@@ -12,8 +12,9 @@
         class="underline"
       >@Hid3</a></p>
     <img src={{imagePath}} class="mt-6" />
+    <p class="mt-6">{{beforePlayingMessage}}</p>
     <div class="text-slate-900 p-6">
-      <form action="/{{id}}" method="POST">
+      <form action={{formActionPath}} method="POST">
         <button
           type="submit"
           class="py-2 px-4 rounded inline-flex items-center bg-white gap-2 font-bold"
@@ -26,7 +27,7 @@
         <input type="hidden" name="hand" value="rock2" />
       </form>
       <div class="flex justify-between mt-6">
-        <form action="/{{id}}" method="POST">
+        <form action={{formActionPath}} method="POST">
           <button
             type="submit"
             class="py-2 px-4 rounded inline-flex items-center bg-white gap-2 font-bold"
@@ -38,7 +39,7 @@
           </button>
           <input type="hidden" name="hand" value="scissors" />
         </form>
-        <form action="/{{id}}" method="POST">
+        <form action={{formActionPath}} method="POST">
           <button
             type="submit"
             class="py-2 px-4 rounded inline-flex items-center bg-white gap-2 font-bold"
