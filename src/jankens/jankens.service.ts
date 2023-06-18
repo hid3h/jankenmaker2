@@ -1,27 +1,41 @@
 import { Injectable, NotFoundException } from "@nestjs/common";
 
 export type JankenResult = "playerWin" | "playerLose" | "draw";
+
+const jankens = {
+  hamtaro: {
+    id: "hamtaro",
+    title: "ハム太郎とじゃんけん",
+    imagePath: "ham1.jpg",
+    winRate: 0.99,
+    playerWinMessages: [
+      "やるやん！\n明日は俺にリベンジさせて。\nじゃあ、どうぞなのだ",
+    ],
+    playerLoseMessages: [
+      "ぼくの勝ちなのだ！\n負けは次に繋がるチャンスなのだ。\nネバーギブアップ！\nほな、いただきます。\n一日一回勝負。\nそれじゃあ、また明日なのだ。",
+      "ぼくの勝ちなのだ！\nたかがじゃんけん、そう思ってないですか？\nそれやったら明日も俺が勝ちますよ。\nほな、いただきます。\n一日一回勝負。\nそれじゃあ、また明日なのだ。",
+      "ぼくの勝ちなのだ！\n何で負けたか、明日まで考えといてなのだ。\nそしたら何かが見えてくるはずです。\nほな、いただきます。\n一日一回勝負。\nそれじゃあ、また明日なのだ。",
+    ],
+    twitterHashtag: "ハム太郎とじゃんけん",
+  },
+  coolpoko: {
+    id: "coolpoko",
+    title: "クールポコとじゃんけん",
+    imagePath: "poko1.jpg",
+    winRate: 0.95,
+    playerWinMessages: [
+      "やるやん！\n明日は俺にリベンジさせて。\nじゃあ、どうぞなのだ",
+    ],
+    playerLoseMessages: ["やっちまったな"],
+  },
+};
+
 @Injectable()
 export class JankensService {
   find(id: string) {
-    if (id !== "hamtaro") {
-      return null;
-    }
+    const janken = jankens[id];
 
-    return {
-      id,
-      title: "ハム太郎とじゃんけん",
-      imagePath: "/ham1.jpg",
-      winRate: 0.99,
-      playerWinMessages: [
-        "やるやん！\n明日は俺にリベンジさせて。\nでは、どうぞ",
-      ],
-      playerLoseMessages: [
-        "ぼくの勝ちなのだ！\n負けは次に繋がるチャンスです。\nネバーギブアップ！\nほな、いただきます。\n一日一回勝負。\nじゃあ、また明日。",
-        "ぼくの勝ちなのだ！\nたかがじゃんけん、そう思ってないですか？\nそれやったら明日も俺が勝ちますよ。\nほな、いただきます。一日一回勝負。\nじゃあ、また明日。",
-        "ぼくの勝ちなのだ！\n何で負けたか、明日まで考えといてなのだ。\nそしたら何かが見えてくるはずです。\nほな、いただきます。\n一日一回勝負。\nじゃあ、また明日。",
-      ],
-    };
+    return janken;
   }
 
   play(jankenId) {
@@ -45,7 +59,9 @@ export class JankensService {
       jankenResultText + "\n" + message,
     );
 
-    const twitterShareUrl = `https://twitter.com/share?url=https://jankenmaker.com/${jankenId}&hashtags=ハム太郎とじゃんけん&text=${twitterSharedText}`;
+    const hashtag = encodeURIComponent(janken.twitterHashtag);
+
+    const twitterShareUrl = `https://twitter.com/share?url=https://jankenmaker.com/${jankenId}&hashtags=${hashtag}&text=${twitterSharedText}`;
 
     return {
       janken,
