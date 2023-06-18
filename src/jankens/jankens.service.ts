@@ -43,7 +43,7 @@ const jankens: Record<string, Janken> = {
     id: "coolpoko",
     title: "クールポコとじゃんけん",
     description: "クールポコとじゃんけんをすることができます。",
-    winRate: 0.9,
+    winRate: 0.95,
     beforePlayingImagePath: "/poko-before-playing.jpeg",
     beforePlayingMessage: "なああああああああああああ",
     playerWin: {
