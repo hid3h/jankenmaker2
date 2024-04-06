@@ -34,7 +34,6 @@ steps:
         gcloud run services replace service.yaml --region=asia-northeast1
     id: UpdateImageTagAndDeploy
 
-
 images:
   - >-
     asia-northeast1-docker.pkg.dev/$PROJECT_ID/cloud-run-source-deploy/$REPO_NAME/jankenmaker2:$COMMIT_SHA
