@@ -1,0 +1,45 @@
+steps:
+  - name: gcr.io/cloud-builders/docker
+    args:
+      - build
+      - "--no-cache"
+      - "-t"
+      - >-
+        asia-northeast1-docker.pkg.dev/$PROJECT_ID/cloud-run-source-deploy/$REPO_NAME/jankenmaker2:$COMMIT_SHA
+      - .
+      - "-f"
+      - Dockerfile
+    id: Build
+  - name: gcr.io/cloud-builders/docker
+    args:
+      - push
+      - >-
+        asia-northeast1-docker.pkg.dev/$PROJECT_ID/cloud-run-source-deploy/$REPO_NAME/jankenmaker2:$COMMIT_SHA
+    id: Push
+  - name: "gcr.io/google.com/cloudsdktool/cloud-sdk:slim"
+    entrypoint: "bash"
+    args:
+      - "-c"
+      - |
+        gcloud run services describe scraps --format export --region=asia-northeast1 > service.yaml
+    id: ExportServiceConfig
+  - name: "gcr.io/google.com/cloudsdktool/cloud-sdk:slim"
+    entrypoint: "bash"
+    args:
+      - "-c"
+      - |
+        cat service.yaml
+        sed -i 's|'"asia-northeast1-docker.pkg.dev/$PROJECT_ID/cloud-run-source-deploy/$REPO_NAME/jankenmaker2"':[^ ]*|'"asia-northeast1-docker.pkg.dev/$PROJECT_ID/cloud-run-source-deploy/$REPO_NAME/jankenmaker2:$COMMIT_SHA"'|g' service.yaml
+        cat service.yaml
+        gcloud run services replace service.yaml --region=asia-northeast1
+    id: UpdateImageTagAndDeploy
+
+images:
+  - >-
+    asia-northeast1-docker.pkg.dev/$PROJECT_ID/cloud-run-source-deploy/$REPO_NAME/jankenmaker2:$COMMIT_SHA
+options:
+  substitutionOption: ALLOW_LOOSE
+tags:
+  - gcp-cloud-build-deploy-cloud-run
+  - gcp-cloud-build-deploy-cloud-run-managed
+  - jankenmaker2-app
