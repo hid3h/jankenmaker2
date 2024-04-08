@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import { findJanken } from "./jankenService";
+import { PlayingJankenButtons } from "./playingJankenButtons";
 
 export default async function JanknDetail({
   params,
@@ -17,7 +18,9 @@ export default async function JanknDetail({
     "use server";
 
     const hand = formData.get("hand");
-    console.log("hand", hand);
+    // 3秒待つ
+    await new Promise((resolve) => setTimeout(resolve, 3000));
+    console.log("formData", formData);
   };
 
   return (
@@ -38,43 +41,8 @@ export default async function JanknDetail({
         <p className="mt-6">{janken.beforePlayingMessage}</p>
         <div className="text-slate-900 p-6">
           <form action={playJanken}>
-            <button
-              type="submit"
-              className="py-2 px-4 rounded inline-flex items-center bg-white gap-2 font-bold"
-            >
-              <img
-                src="/svgs/hand-back-fist-regular.svg"
-                className="w-8 bg-white"
-              />
-              <span>グーで勝つ</span>
-            </button>
-            <input type="hidden" name="hand" value="rock" />
+            <PlayingJankenButtons />
           </form>
-          <div className="flex justify-between mt-6">
-            <form action={playJanken}>
-              <button
-                type="submit"
-                className="py-2 px-4 rounded inline-flex items-center bg-white gap-2 font-bold"
-              >
-                <img
-                  src="/svgs/hand-scissors-regular.svg"
-                  className="w-8 bg-white transform rotate-90"
-                />
-                <span>チョキで勝つ</span>
-              </button>
-              <input type="hidden" name="hand" value="scissors" />
-            </form>
-            <form action={playJanken}>
-              <button
-                type="submit"
-                className="py-2 px-4 rounded inline-flex items-center bg-white gap-2 font-bold"
-              >
-                <img src="/svgs/hand-regular.svg" className="w-8 bg-white" />
-                <span>パーで勝つ</span>
-              </button>
-              <input type="hidden" name="hand" value="paper" />
-            </form>
-          </div>
         </div>
       </div>
     </div>
