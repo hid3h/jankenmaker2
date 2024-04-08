@@ -1,6 +1,9 @@
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import { findJanken } from "./jankenService";
 import { PlayingJankenButtons } from "./playingJankenButtons";
+import { revalidatePath } from "next/cache";
+import { useFormState } from "react-dom";
+import { PlayingJaken } from "./ui/playignJanken";
 
 export default async function JanknDetail({
   params,
@@ -14,21 +17,12 @@ export default async function JanknDetail({
     notFound();
   }
 
-  const playJanken = async (formData: FormData) => {
-    "use server";
-
-    const hand = formData.get("hand");
-    // 3秒待つ
-    await new Promise((resolve) => setTimeout(resolve, 3000));
-    console.log("formData", formData);
-  };
-
   return (
     <div className="text-center text-white bg-slate-900 flex justify-center min-h-screen">
       <div className="max-w-xl py-6">
         <h1>{janken.title}</h1>
         <p>
-          作者:
+          作者:{" "}
           <a
             href="https://twitter.com/_hid3"
             target="_brank"
@@ -37,13 +31,10 @@ export default async function JanknDetail({
             @Hid3
           </a>
         </p>
-        <img src={janken.beforePlayingImagePath} className="mt-6" />
-        <p className="mt-6">{janken.beforePlayingMessage}</p>
-        <div className="text-slate-900 p-6">
-          <form action={playJanken}>
-            <PlayingJankenButtons />
-          </form>
-        </div>
+        <PlayingJaken
+          beforePlayingImagePath={janken.beforePlayingImagePath}
+          beforePlayingMessage={janken.beforePlayingMessage}
+        />
       </div>
     </div>
   );
